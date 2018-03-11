@@ -19,6 +19,7 @@ namespace Inventory
                 return new ObservableCollection<CustomerViewModel>(dataService.GetCustomers().Result.Select(x => new CustomerViewModel()
                 {
                     Name = x.Name,
+                    Thumbnail = x.Thumbnail,
                 }));
             }
         }

@@ -21,7 +21,7 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Image Source="{Binding Image}" />
+                    <Image Source="{Binding Thumbnail, Converter={StaticResource ByteArrayToBitmapConverter}}" Stretch="None" />
                     <TextBlock Grid.Column="1" Text="{Binding CustomerId}" />
                     <TextBlock Grid.Column="2" Text="{Binding Name}" />
                     <TextBlock Grid.Column="3" Text="{Binding Email}" />

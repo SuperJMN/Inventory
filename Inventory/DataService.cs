@@ -21,6 +21,7 @@ namespace Inventory
                 var customerDtos = context.Customers.Select(x => new CustomerDto()
                 {
                     Name = x.FirstName,
+                    Thumbnail = x.Thumbnail,
                 });
 
                 return await customerDtos.ToListAsync();

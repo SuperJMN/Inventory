@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Inventory"
     xmlns:controls="using:Telerik.UI.Xaml.Controls"
+    xmlns:converters="using:Inventory.Converters"
     RequestedTheme="Light">
 
     <Application.Resources>
@@ -14,6 +15,7 @@
                                                  LightResourcesPath="ms-appx:///Themes/TelerikTheme.xaml" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+            <converters:ByteArrayToImageConverter x:Key="ByteArrayToBitmapConverter" />
         </ResourceDictionary>
     </Application.Resources>
 
