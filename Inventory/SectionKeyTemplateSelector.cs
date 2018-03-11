@@ -19,11 +19,8 @@ namespace Inventory
 
             var dict = (IDictionary<object, object>) Items;
 
-            //var vm = (SectionViewModel) item;
-            //var key = (SectionKey)vm.Key;
-            var itemName = Enum.GetName(typeof(SectionKey), item);
-
-            if (dict.TryGetValue(itemName, out var t))
+            var name = item.GetType().Name.Replace("ViewModel", "");
+            if (dict.TryGetValue(name, out var t))
             {
                 return (DataTemplate) t;
             }

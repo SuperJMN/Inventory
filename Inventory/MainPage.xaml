@@ -33,7 +33,7 @@
             </DataTemplate>
         </NavigationView.MenuItemTemplate>
         
-        <ContentControl Content="{Binding SelectedSection.Key}" ContentTemplateSelector="{StaticResource SectionSelector}">
+        <ContentControl Content="{Binding SelectedSection.ViewModel}" ContentTemplateSelector="{StaticResource SectionSelector}">
             <ContentControl.ContentTransitions>
                 <TransitionCollection>
                     <ContentThemeTransition />

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace VanArsdel.Data
 {
     [Table("Customers")]
-    public partial class Customer
+    public class Customer
     {
         [Key]
         [DatabaseGenerat‌​ed(DatabaseGeneratedOption.None)]

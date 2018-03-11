@@ -1,17 +1,26 @@
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Inventory
 {
     public class CustomersViewModel : ViewModelBase
     {
-        public ObservableCollection<CustomerViewModel> Customers { get;  } = new ObservableCollection<CustomerViewModel>()
+        private readonly IDataService dataService;
+
+        public CustomersViewModel(IDataService dataService)
         {
-            new CustomerViewModel()
+            this.dataService = dataService;
+        }
+
+        public ObservableCollection<CustomerViewModel> Customers
+        {
+            get
             {
-                Name = "Pepito",
-                CustomerId = 123,
-                Email = "superjmn@outlook.com"
+                return new ObservableCollection<CustomerViewModel>(dataService.GetCustomers().Result.Select(x => new CustomerViewModel()
+                {
+                    Name = x.Name,
+                }));
             }
-        };
+        }
     }
 }

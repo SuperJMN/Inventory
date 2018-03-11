@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -25,7 +23,12 @@ namespace Inventory
         public MainPage()
         {
             this.InitializeComponent();
-            this.DataContext = new MainViewModel();
+
+            var container = new Grace.DependencyInjection.DependencyInjectionContainer();
+            container.Configure(x => x.Export<DataService>().As<IDataService>());
+            container.Configure(x => x.Export<CustomersViewModel>());
+
+            this.DataContext = container.Locate<MainViewModel>();
         }
     }
 }

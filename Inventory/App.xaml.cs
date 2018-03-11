@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,6 +31,18 @@ namespace Inventory
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            InitializeDatabase();
+        }
+
+        private async void InitializeDatabase()
+        {
+            var folder = ApplicationData.Current.LocalFolder;
+            if (await folder.TryGetItemAsync("VanArsdel.db") == null)
+            {
+                var sourceDatabaseFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Database/VanArsdel.db"));
+                var targetDatabaseFile = await folder.CreateFileAsync("VanArsdel.db", CreationCollisionOption.ReplaceExisting);
+                await sourceDatabaseFile.CopyAndReplaceAsync(targetDatabaseFile);
+            }
         }
 
         /// <summary>
