@@ -4,10 +4,22 @@
     xmlns:local="using:Inventory"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="using:Inventory.Views"
     x:Class="Inventory.MainPage"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance local:MainViewModel}">
 
-    <NavigationView MenuItemsSource="{Binding Sections}" SelectedItem="{Binding SelectedSection, Mode=TwoWay}">
+    <NavigationView MenuItemsSource="{Binding Sections}" SelectedItem="{Binding SelectedSection, Mode=TwoWay}" AlwaysShowHeader="False">
+        <NavigationView.Resources>
+            <local:SectionKeyTemplateSelector x:Key="SectionSelector">
+                <local:SectionKeyTemplateSelector.Items>
+                    <ResourceDictionary>
+                        <DataTemplate x:Key="Customers">
+                            <views:CustomersView></views:CustomersView>
+                        </DataTemplate>
+                    </ResourceDictionary>
+                </local:SectionKeyTemplateSelector.Items>
+            </local:SectionKeyTemplateSelector>
+        </NavigationView.Resources>
         <NavigationView.MenuItemTemplate>
             <DataTemplate>
                 <Grid d:DataContext="{d:DesignInstance local:SectionViewModel}" Margin="-16,0">
@@ -21,7 +33,7 @@
             </DataTemplate>
         </NavigationView.MenuItemTemplate>
         
-        <ContentControl Content="{Binding SelectedSection}">
+        <ContentControl Content="{Binding SelectedSection.Key}" ContentTemplateSelector="{StaticResource SectionSelector}">
             <ContentControl.ContentTransitions>
                 <TransitionCollection>
                     <ContentThemeTransition />
@@ -30,4 +42,4 @@
         </ContentControl>
 
     </NavigationView>
-</Page>                                                                                                                                
+</Page>                                                                                                                                                                                                                                                                

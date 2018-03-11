@@ -1,0 +1,15 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="TelerikSelectedColor">Blue</Color>
+    <Color x:Key="TelerikHighlightedColor">LightBlue</Color>
+
+    <SolidColorBrush x:Key="TelerikGridHeaderBackgroundBrush" Color="Transparent" />
+    <SolidColorBrush x:Key="TelerikGridGroupHeaderBackgroundBrush" Color="Transparent" />
+    <SolidColorBrush x:Key="TelerikGridServiceColumnBackgroundBrush" Color="#7A6F41" />
+    <SolidColorBrush x:Key="TelerikGridHeaderForegroundBrush" Color="Black" />
+    <SolidColorBrush x:Key="TelerikGridGroupHeaderForegroundBrush" Color="Black" />
+    <SolidColorBrush x:Key="TelerikGridServiceColumnForegroundBrush" Color="Black" />
+
+</ResourceDictionary>

@@ -2,12 +2,10 @@ namespace Inventory
 {
     public class Section
     {
-        public SectionKey SectionKey { get; }
-
-        public Section(string name, SectionKey sectionKey)
+        public Section(string name, SectionKey key)
         {
             Name = name;
-            SectionKey = sectionKey;
+            Key = key;
         }
 
         public string Name { get; }
