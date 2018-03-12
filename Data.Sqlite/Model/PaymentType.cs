@@ -1,11 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace VanArsdel.Data
+namespace Data.Sqlite.Model
 {
     [Table("PaymentTypes")]
-    public partial class PaymentType
+    public class PaymentType
     {
         [Key]
         [DatabaseGenerat‌​ed(DatabaseGeneratedOption.None)]

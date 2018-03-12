@@ -2,10 +2,10 @@ namespace Inventory
 {
     public class SectionViewModel : ViewModelBase
     {
-        public object ViewModel { get; }
+        public ViewModelBase ViewModel { get; }
         public Section Section { get; }
 
-        public SectionViewModel(Section section, object viewModel)
+        public SectionViewModel(Section section, ViewModelBase viewModel)
         {
             this.ViewModel = viewModel;
             Section = section;

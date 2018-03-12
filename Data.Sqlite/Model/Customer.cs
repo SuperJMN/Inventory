@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace VanArsdel.Data
+namespace Data.Sqlite.Model
 {
     [Table("Customers")]
     public class Customer

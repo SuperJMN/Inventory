@@ -2,10 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace VanArsdel.Data
+namespace Data.Sqlite.Model
 {
     [Table("Products")]
-    public partial class Product
+    public class Product
     {
         [MaxLength(16)]
         [Key, Column(Order = 0)]

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Inventory
 {
@@ -11,6 +12,8 @@ namespace Inventory
                 new SectionViewModel(new Section("Customers", SectionKey.Customers), customersViewModel),
                 new SectionViewModel(new Section("Orders", SectionKey.Orders), null) 
             };
+
+            SelectedSection = Sections.FirstOrDefault();
         }
 
         private SectionViewModel selectedSection;

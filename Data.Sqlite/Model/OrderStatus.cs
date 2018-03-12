@@ -1,11 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace VanArsdel.Data
+namespace Data.Sqlite.Model
 {
     [Table("OrderStatus")]
-    public partial class OrderStatus
+    public class OrderStatus
     {
         [Key]
         [DatabaseGenerat‌​ed(DatabaseGeneratedOption.None)]

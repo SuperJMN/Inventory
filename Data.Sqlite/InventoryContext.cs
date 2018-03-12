@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using VanArsdel.Data;
+﻿using Data.Sqlite.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Sqlite
 {

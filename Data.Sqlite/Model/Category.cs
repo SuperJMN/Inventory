@@ -1,11 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace VanArsdel.Data
+namespace Data.Sqlite.Model
 {
     [Table("Categories")]
-    public partial class Category
+    public class Category
     {
         [Key]
         [DatabaseGenerat‌​ed(DatabaseGeneratedOption.None)]

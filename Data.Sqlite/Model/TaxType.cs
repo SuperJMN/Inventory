@@ -1,11 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace VanArsdel.Data
+namespace Data.Sqlite.Model
 {
     [Table("TaxTypes")]
-    public partial class TaxType
+    public class TaxType
     {
         [Key]
         [DatabaseGenerat‌​ed(DatabaseGeneratedOption.None)]

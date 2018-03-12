@@ -5,6 +5,7 @@ namespace Inventory
 {
     public interface IDataService
     {
-        Task<IReadOnlyList<CustomerDto>> GetCustomers();
+        Task<List<CustomerDto>> GetCustomers(ListRequest request);
+        Task<int> GetTotalCustomers();
     }
 }

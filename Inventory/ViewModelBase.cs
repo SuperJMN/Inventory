@@ -6,6 +6,18 @@ namespace Inventory
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get => isBusy;
+            set
+            {
+                isBusy = value;
+                OnPropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
