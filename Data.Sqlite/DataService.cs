@@ -24,8 +24,15 @@ namespace Inventory.Data.Sqlite
                     .Select(x => new CustomerDto()
                     {
                         CustomerId = x.CustomerID,
-                        Name = string.Join(" ", x.FirstName, x.LastName),
+                        FirstName = x.FirstName,
+                        LastName = x.LastName,
                         Thumbnail = x.Thumbnail,
+                        Picture = x.Picture,
+                        Phone = x.Phone,
+                        Email = x.EmailAddress,
+                        AddressLine1 = x.AddressLine1,
+                        AddressLine2 = x.AddressLine2,
+                        CountryName = x.CountryCode,
                     });
 
                 var results = await customerDtos.ToListAsync();

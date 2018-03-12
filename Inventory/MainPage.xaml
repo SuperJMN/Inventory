@@ -40,7 +40,7 @@
             </DataTemplate>
         </NavigationView.MenuItemTemplate>
 
-        <Grid>
+        <Grid Background="#F4F4F4">
             <ContentControl Content="{Binding SelectedSection.ViewModel}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                             ContentTemplateSelector="{StaticResource SectionSelector}">
                 <ContentControl.ContentTransitions>

@@ -25,7 +25,7 @@ namespace Inventory.ViewModels.Customers
         {
             IsBusy = true;
             var count = await dataService.GetTotalCustomers();
-            CustomerPages = Enumerable.Range(0, Math.Min(15, count)).Select(x => new CustomerPageViewModel(dataService, x, PageSize)).ToList().AsReadOnly();
+            CustomerPages = Enumerable.Range(0, Math.Min(5, count)).Select(x => new CustomerPageViewModel(dataService, x, PageSize)).ToList().AsReadOnly();
             IsBusy = false;
         }
 
@@ -52,8 +52,8 @@ namespace Inventory.ViewModels.Customers
     {
         private readonly IDataService dataservice;
         public int Ordinal { get; }
-        private bool isBusy;
         private IReadOnlyList<CustomerViewModel> customers;
+        private CustomerViewModel selectedCustomer;
 
         public CustomerPageViewModel(IDataService dataservice, int ordinal, int pageSize)
         {
@@ -65,15 +65,26 @@ namespace Inventory.ViewModels.Customers
 
         private async Task<IReadOnlyList<CustomerViewModel>> LoadCustomers()
         {
+            IsBusy = true;
+
             var listRequest = new ListRequest() { Skip = PageSize * Ordinal, Take = PageSize };
             var loadCustomers = await dataservice.GetCustomers(listRequest);
-            return loadCustomers.Select(x => new CustomerViewModel()
+            var vms = loadCustomers.Select(x => new CustomerViewModel()
             {
-                Name = x.Name,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
                 CustomerId = x.CustomerId,
                 Email = x.Email,
                 Thumbnail = x.Thumbnail,
+                Picture = x.Picture,                
+                Phone = x.Phone,
+                AddressLine1 = x.AddressLine1,
+                CountryName = x.CountryName,
             }).ToList().AsReadOnly();
+
+            IsBusy = false;
+
+            return vms;
         }
 
         public int PageSize { get; set; }
@@ -91,5 +102,15 @@ namespace Inventory.ViewModels.Customers
      
 
         public ICommand LoadCustomersCommand { get; }
+
+        public CustomerViewModel SelectedCustomer
+        {
+            get => selectedCustomer;
+            set
+            {
+                selectedCustomer = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }
