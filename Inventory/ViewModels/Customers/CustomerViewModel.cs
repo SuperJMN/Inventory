@@ -1,4 +1,4 @@
-namespace Inventory
+namespace Inventory.ViewModels.Customers
 {
     public class CustomerViewModel
     {

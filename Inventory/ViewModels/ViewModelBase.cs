@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Inventory.Annotations;
+using Inventory.Properties;
 
-namespace Inventory
+namespace Inventory.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

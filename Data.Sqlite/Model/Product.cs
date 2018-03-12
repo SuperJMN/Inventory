@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Data.Sqlite.Model
+namespace Inventory.Data.Sqlite.Model
 {
     [Table("Products")]
     public class Product

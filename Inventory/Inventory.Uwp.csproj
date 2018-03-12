@@ -96,24 +96,23 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ByteArrayToImageConverter.cs" />
-    <Compile Include="CustomerDto.cs" />
-    <Compile Include="CustomersViewModel.cs" />
-    <Compile Include="CustomerViewModel.cs" />
-    <Compile Include="DataService.cs" />
-    <Compile Include="IDataService.cs" />
-    <Compile Include="INavigationService.cs" />
+    <Compile Include="ViewModels\Customers\CustomersViewModel.cs" />
+    <Compile Include="ViewModels\Customers\CustomerViewModel.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Section.cs" />
-    <Compile Include="SectionKey.cs" />
-    <Compile Include="SectionViewModel.cs" />
+    <Compile Include="ViewModels\Main\Section.cs" />
+    <Compile Include="ViewModels\Main\SectionKey.cs" />
+    <Compile Include="ViewModels\Main\SectionViewModel.cs" />
     <Compile Include="SectionKeyTemplateSelector.cs" />
-    <Compile Include="ViewModelBase.cs" />
-    <Compile Include="Views\CustomersView.xaml.cs">
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\Customers\CustomersListControl.xaml.cs">
+      <DependentUpon>CustomersListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customers\CustomersView.xaml.cs">
       <DependentUpon>CustomersView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -147,7 +146,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CustomersView.xaml">
+    <Page Include="Views\Customers\CustomersListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Customers\CustomersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,9 +179,13 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data.Sqlite\Data.Sqlite.csproj">
-      <Project>{B2931FAA-F847-45BC-A7FD-3F547EC24CD0}</Project>
-      <Name>Data.Sqlite</Name>
+    <ProjectReference Include="..\Data.Sqlite\Inventory.Data.Sqlite.csproj">
+      <Project>{b2931faa-f847-45bc-a7fd-3f547ec24cd0}</Project>
+      <Name>Inventory.Data.Sqlite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Inventory.Data.csproj">
+      <Project>{88FCBF39-0A16-4750-8CF0-7E34BB153F48}</Project>
+      <Name>Inventory.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Data.Sqlite.Model
+namespace Inventory.Data.Sqlite.Model
 {
     [Table("TaxTypes")]
     public class TaxType
     {
         [Key]
-        [DatabaseGenerat‌​ed(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TaxTypeID { get; set; }
 
         [Required]

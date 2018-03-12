@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Inventory.Data;
 using Microsoft.Practices.Prism.Commands;
 
-namespace Inventory
+namespace Inventory.ViewModels.Customers
 {
     public class CustomersViewModel : ViewModelBase
     {

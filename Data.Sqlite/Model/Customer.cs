@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Data.Sqlite.Model
+namespace Inventory.Data.Sqlite.Model
 {
     [Table("Customers")]
     public class Customer
     {
         [Key]
-        [DatabaseGenerat‌​ed(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long CustomerID { get; set; }
 
         [MaxLength(8)]

@@ -15,13 +15,13 @@ using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace Inventory.Views
+namespace Inventory.Views.Customers
 {
-    public sealed partial class CustomersView : UserControl
+    public sealed partial class CustomersListControl : UserControl
     {
-        public CustomersView()
+        public CustomersListControl()
         {
-            this.InitializeComponent();            
+            this.InitializeComponent();
         }
     }
 }

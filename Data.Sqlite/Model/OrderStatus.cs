@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Data.Sqlite.Model
+namespace Inventory.Data.Sqlite.Model
 {
     [Table("OrderStatus")]
     public class OrderStatus
     {
         [Key]
-        [DatabaseGenerat‌​ed(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Status { get; set; }
 
         [Required]

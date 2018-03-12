@@ -1,4 +1,4 @@
-namespace Inventory
+namespace Inventory.ViewModels.Main
 {
     public enum SectionKey
     {

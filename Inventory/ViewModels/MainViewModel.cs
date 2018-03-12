@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using Inventory.ViewModels.Customers;
+using Inventory.ViewModels.Main;
 
-namespace Inventory
+namespace Inventory.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {

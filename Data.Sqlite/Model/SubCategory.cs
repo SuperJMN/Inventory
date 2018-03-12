@@ -1,17 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Data.Sqlite.Model
+namespace Inventory.Data.Sqlite.Model
 {
     [Table("SubCategories")]
     public class SubCategory
     {
         [Key]
-        [DatabaseGenerat‌​ed(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int CategoryID { get; set; }
 
         [Key, Column(Order = 1)]
-        [DatabaseGenerat‌​ed(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SubCategoryID { get; set; }
 
         [Required]

@@ -2,10 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
-namespace Inventory
+namespace Inventory.Data.Sqlite
 {
     public class DataService : IDataService
     {
@@ -57,11 +56,5 @@ namespace Inventory
 
         public ReadOnlyCollection<T> Results => results.AsReadOnly();
         public int Count => count;
-    }
-
-    public class ListRequest
-    {
-        public int Skip { get; set; }
-        public int Take { get; set; }
     }
 }

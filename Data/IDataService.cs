@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Inventory
+namespace Inventory.Data
 {
     public interface IDataService
     {

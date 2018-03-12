@@ -1,4 +1,4 @@
-﻿namespace Inventory
+﻿namespace Inventory.Data
 {
     public class CustomerDto
     {

@@ -1,7 +1,7 @@
-﻿using Data.Sqlite.Model;
+﻿using Inventory.Data.Sqlite.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace Data.Sqlite
+namespace Inventory.Data.Sqlite
 {
     public class InventoryContext : DbContext
     {
