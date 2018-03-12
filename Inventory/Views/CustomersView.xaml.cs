@@ -21,7 +21,7 @@ namespace Inventory.Views
     {
         public CustomersView()
         {
-            this.InitializeComponent();
+            this.InitializeComponent();            
         }
     }
 }

@@ -20,7 +20,8 @@ namespace Inventory
             {
                 var customerDtos = context.Customers.Select(x => new CustomerDto()
                 {
-                    Name = x.FirstName,
+                    CustomerId = x.CustomerID,
+                    Name = string.Join(" ", x.FirstName, x.LastName),
                     Thumbnail = x.Thumbnail,
                 });
 

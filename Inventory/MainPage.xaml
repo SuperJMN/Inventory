@@ -5,6 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:Inventory.Views"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:effects="using:Microsoft.Toolkit.Uwp.UI.Animations.Effects"
+    xmlns:behaviors1="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
     x:Class="Inventory.MainPage"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance local:MainViewModel}">
 
@@ -32,14 +36,37 @@
                 </Grid>
             </DataTemplate>
         </NavigationView.MenuItemTemplate>
-        
-        <ContentControl Content="{Binding SelectedSection.ViewModel}" ContentTemplateSelector="{StaticResource SectionSelector}">
-            <ContentControl.ContentTransitions>
-                <TransitionCollection>
-                    <ContentThemeTransition />
-                </TransitionCollection>
-            </ContentControl.ContentTransitions>
-        </ContentControl>
+
+        <Grid>
+            <ContentControl Content="{Binding SelectedSection.ViewModel}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                            ContentTemplateSelector="{StaticResource SectionSelector}">
+                <ContentControl.ContentTransitions>
+                    <TransitionCollection>
+                        <ContentThemeTransition />
+                    </TransitionCollection>
+                </ContentControl.ContentTransitions>
+            </ContentControl>
+            <controls:Loading IsLoading="{Binding SelectedSection.ViewModel.IsBusy}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                              VerticalContentAlignment="Stretch"
+                              HorizontalContentAlignment="Stretch">
+                <Grid>
+
+                    <Border Background="#83FFFFFF" >
+                        <interactivity:Interaction.Behaviors>
+                            <behaviors1:Blur
+                                Value="2.67"
+                                Duration="698.28"
+                                Delay="0"
+                                AutomaticallyStart="True">
+                            </behaviors1:Blur>
+                        </interactivity:Interaction.Behaviors>
+                    </Border>
+
+                    <ProgressRing Height="200" Width="200" IsActive="{Binding SelectedSection.ViewModel.IsBusy}" />
+
+                </Grid>
+            </controls:Loading>
+        </Grid>
 
     </NavigationView>
-</Page>                                                                                                                                                                                                                                                                
+</Page>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
