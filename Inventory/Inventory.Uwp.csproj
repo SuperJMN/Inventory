@@ -96,7 +96,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ByteArrayToImageConverter.cs" />
+    <Compile Include="Mapping\CustomerDtoMapping.cs" />
     <Compile Include="Mapping\CustomerMapping.cs" />
+    <Compile Include="Mapping\OrderDtoMapping.cs" />
     <Compile Include="Mapping\OrderMapping.cs" />
     <Compile Include="ViewModels\Customers\CustomerPageViewModel.cs" />
     <Compile Include="ViewModels\Customers\CustomersViewModel.cs" />
@@ -104,6 +106,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Orders\OrdersViewModel.cs" />
+    <Compile Include="ViewModels\Orders\OrderPageViewModel.cs" />
+    <Compile Include="ViewModels\Orders\OrderViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,6 +125,9 @@
     </Compile>
     <Compile Include="Views\Customers\Details\CustomerDetailsControls.xaml.cs">
       <DependentUpon>CustomerDetailsControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Orders\OrdersListControl.xaml.cs">
+      <DependentUpon>OrdersListControl.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +172,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Orders\OrdersListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper">
@@ -197,7 +209,7 @@
       <Name>Inventory.Data.Sqlite</Name>
     </ProjectReference>
     <ProjectReference Include="..\Data\Inventory.Data.csproj">
-      <Project>{88FCBF39-0A16-4750-8CF0-7E34BB153F48}</Project>
+      <Project>{88fcbf39-0a16-4750-8cf0-7e34bb153f48}</Project>
       <Name>Inventory.Data</Name>
     </ProjectReference>
   </ItemGroup>

@@ -1,24 +1,28 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Inventory.Data;
-using Inventory.ViewModels.Orders;
+using Inventory.ViewModels.Customers;
 using Microsoft.Practices.Prism.Commands;
 
-namespace Inventory.ViewModels.Customers
+namespace Inventory.ViewModels.Orders
 {
-    public class CustomersViewModel : ViewModelBase
+    public class OrdersViewModel : ViewModelBase
     {
         private readonly IDataService dataService;
+        private readonly long customerId;
         private int pageSize;
-        private IReadOnlyList<CustomerPageViewModel> customerPages;
+        private ReadOnlyCollection<OrderPageViewModel> orderPages;
         private CustomerPageViewModel selectedPage;
+        private OrderPageViewModel orderPage;
 
-        public CustomersViewModel(IDataService dataService)
+        public OrdersViewModel(IDataService dataService, long customerId)
         {
             this.dataService = dataService;
+            this.customerId = customerId;
             CreatePagesCommand = new DelegateCommand(async () => await CreatePages());
             PageSize = 20;
         }
@@ -26,8 +30,8 @@ namespace Inventory.ViewModels.Customers
         private async Task CreatePages()
         {
             IsBusy = true;
-            var count = await dataService.GetTotalCustomers();
-            CustomerPages = Enumerable.Range(1, Math.Min(5, count)).Select(x => new CustomerPageViewModel(dataService, x, PageSize)).ToList().AsReadOnly();
+            var count = await dataService.GetTotalOrders();
+            OrderPages = Enumerable.Range(1, Math.Min(5, count)).Select(x => new OrderPageViewModel(dataService, customerId, x, PageSize)).ToList().AsReadOnly();
             IsBusy = false;
         }
 
@@ -37,12 +41,12 @@ namespace Inventory.ViewModels.Customers
             set => pageSize = value;
         }
 
-        public IReadOnlyList<CustomerPageViewModel> CustomerPages
+        public ReadOnlyCollection<OrderPageViewModel> OrderPages
         {
-            get => customerPages;
+            get => orderPages;
             private set
             {
-                customerPages = value;
+                orderPages = value;
                 OnPropertyChanged();
             }
         }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper.QueryableExtensions;
@@ -48,21 +47,25 @@ namespace Inventory.Data.Sqlite
                 return await context.Customers.CountAsync();
             }
         }
-    }
 
-    public class PagedList<T>
-    {
-        private readonly List<T> results;
-        private readonly int count;
-
-        public PagedList(List<T> results, int count)
+        public async Task<List<OrderDto>> GetOrdersByCustomer(long customerCustomerId, ListRequest listRequest)
         {
-            this.results = results;
-            this.count = count;
-            throw new System.NotImplementedException();
+            using (var context = CreateContext())
+            {
+                return await context.Orders
+                    .Where(x => x.CustomerID == customerCustomerId)
+                    .ProjectTo<OrderDto>()
+                    .ToListAsync();
+            } 
         }
 
-        public ReadOnlyCollection<T> Results => results.AsReadOnly();
-        public int Count => count;
+        public async Task<int> GetTotalOrders()
+        {
+            using (var context = CreateContext())
+            {
+                return await context.Orders.CountAsync();
+            }
+        }
+    
     }
 }

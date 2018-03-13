@@ -23,7 +23,7 @@ namespace Inventory
             container.Configure(x => x.Export<DataService>().As<IDataService>());
             container.Configure(x => x.Export<CustomersViewModel>());
 
-            Mapper.Initialize(x => x.AddProfiles(typeof(CustomerDto), typeof(Customer)));
+            Mapper.Initialize(x => x.AddProfiles(typeof(CustomerDto), typeof(Customer), typeof(CustomerViewModel)));
 
             this.DataContext = container.Locate<MainViewModel>();
         }

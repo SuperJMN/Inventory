@@ -34,7 +34,8 @@ namespace Inventory.ViewModels.Customers
 
             var listRequest = new ListRequest { Skip = PageSize * (PageId - 1), Take = PageSize };
             var loadCustomers = await dataservice.GetCustomers(listRequest);
-            var vms = loadCustomers.Select(x => new CustomerViewModel()
+            
+            var vms = loadCustomers.Select(x => new CustomerViewModel(dataservice, x.CustomerId)
             {
                 FirstName = x.FirstName,
                 LastName = x.LastName,
@@ -45,7 +46,7 @@ namespace Inventory.ViewModels.Customers
                 Phone = x.Phone,
                 AddressLine1 = x.AddressLine1,
                 CountryName = x.CountryName,
-                MiddleName = x.MiddleName,
+                MiddleName = x.MiddleName,                
             }).ToList().AsReadOnly();
 
             IsBusy = false;
