@@ -1,6 +1,8 @@
 ﻿using Windows.UI.Xaml.Controls;
+using AutoMapper;
 using Inventory.Data;
 using Inventory.Data.Sqlite;
+using Inventory.Data.Sqlite.Model;
 using Inventory.ViewModels;
 using Inventory.ViewModels.Customers;
 
@@ -20,6 +22,8 @@ namespace Inventory
             var container = new Grace.DependencyInjection.DependencyInjectionContainer();
             container.Configure(x => x.Export<DataService>().As<IDataService>());
             container.Configure(x => x.Export<CustomersViewModel>());
+
+            Mapper.Initialize(x => x.AddProfiles(typeof(CustomerDto), typeof(Customer)));
 
             this.DataContext = container.Locate<MainViewModel>();
         }

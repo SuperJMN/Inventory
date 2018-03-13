@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Inventory.Data.Sqlite
@@ -14,28 +15,28 @@ namespace Inventory.Data.Sqlite
             return new InventoryContext(builder.Options);
         }
 
+        public async Task<List<OrderDto>> GetOrder(int orderId)
+        {
+            using (var context = CreateContext())
+            {
+                return await context.Orders
+                    .Where(x => x.OrderID == orderId)
+                    .ProjectTo<OrderDto>()
+                    .ToListAsync();
+            }
+        }
+
         public async Task<List<CustomerDto>> GetCustomers(ListRequest listRequest)
         {
             using (var context = CreateContext())
             {
-                var customerDtos = context.Customers
+                var results = await context.Customers
+                    .OrderBy(x => x.FirstName)
                     .Skip(listRequest.Skip)
                     .Take(listRequest.Take)
-                    .Select(x => new CustomerDto()
-                    {
-                        CustomerId = x.CustomerID,
-                        FirstName = x.FirstName,
-                        LastName = x.LastName,
-                        Thumbnail = x.Thumbnail,
-                        Picture = x.Picture,
-                        Phone = x.Phone,
-                        Email = x.EmailAddress,
-                        AddressLine1 = x.AddressLine1,
-                        AddressLine2 = x.AddressLine2,
-                        CountryName = x.CountryCode,
-                    });
+                    .ProjectTo<CustomerDto>()
+                    .ToListAsync();
 
-                var results = await customerDtos.ToListAsync();
                 return results;
             }
         }

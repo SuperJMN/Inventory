@@ -12,5 +12,6 @@
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
         public string CountryName { get; set; }
+        public string MiddleName { get; set; }
     }
 }

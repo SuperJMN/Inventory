@@ -24,5 +24,20 @@
             <!--<TextBlock Text="{Binding CreatedOnString, Mode=OneWay}" TextAlignment="Center" HorizontalAlignment="Stretch" FontSize="14" IsTextSelectionEnabled="True" />-->
         </StackPanel>
 
+        <StackPanel Grid.Column="1" Spacing="6">
+            <TextBox Header="First Name" Text="{Binding FirstName, Mode=TwoWay}" />
+            <TextBox Header="Middle Name" Text="{Binding MiddleName, Mode=TwoWay}" />
+            <TextBox Header="Last Name" Text="{Binding LastName, Mode=TwoWay}" />
+            <TextBox Header="Email Address" Text="{Binding Email, Mode=TwoWay}" />
+            <TextBox Header="Phone" Text="{Binding Phone, Mode=TwoWay}" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Spacing="6">
+            <TextBox Header="Address" Text="{Binding AddressLine1, Mode=TwoWay}" />
+            <TextBox Header="Postal Code" Text="{Binding PostalCode, Mode=TwoWay}" />
+            <TextBox Header="City" Text="{Binding City, Mode=TwoWay}" />
+            <TextBox Header="Region" Text="{Binding Region, Mode=TwoWay}" />
+        </StackPanel>
+
     </Grid>
 </UserControl>

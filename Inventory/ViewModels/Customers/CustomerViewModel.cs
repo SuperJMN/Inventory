@@ -18,5 +18,13 @@ namespace Inventory.ViewModels.Customers
         public string AddressLine1 { get;set; }
 
         public string CountryName { get; set; }
+
+        public string MiddleName { get; set; }
+
+        public string City { get; set; }
+
+        public string Region { get; set; }
+
+        public string PostalCode { get; }
     }
 }

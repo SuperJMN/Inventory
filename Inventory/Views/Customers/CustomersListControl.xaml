@@ -630,17 +630,18 @@
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
 
-    <Pivot Style="{StaticResource PivotStyle1}" ItemsSource="{Binding CustomerPages}">
+    <Pivot Style="{StaticResource PivotStyle1}" ItemsSource="{Binding CustomerPages}" SelectedItem="{Binding SelectedPage, Mode=TwoWay}">
 
         <Pivot.HeaderTemplate>
             <DataTemplate x:DataType="customers:CustomerPageViewModel">
-                <Button Background="Transparent" BorderThickness="1" Margin="0" BorderBrush="LightGray" Content="{Binding Ordinal}" />
+                <Button Background="Transparent" BorderThickness="1" Margin="0" BorderBrush="LightGray" Content="{Binding PageId}" />
             </DataTemplate>
         </Pivot.HeaderTemplate>
 
         <Pivot.ItemTemplate>
             <DataTemplate>
-                <ListView ItemsSource="{Binding Customers}" Style="{StaticResource FixedHeaderListViewStyle}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}">
+                <ListView ItemsSource="{Binding Customers}" Style="{StaticResource FixedHeaderListViewStyle}" 
+                          SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}">
 
                     <ListView.HeaderTemplate>
                         <DataTemplate>
@@ -702,7 +703,7 @@
                                 </Grid.ColumnDefinitions>
                                 <PersonPicture ProfilePicture="{Binding Thumbnail, Converter={StaticResource ByteArrayToBitmapConverter}}" Height="28" Width="28" />
                                 <TextBlock Grid.Column="1" Text="{Binding CustomerId}" />
-                                <TextBlock Grid.Column="2" Text="{Binding FirstName}" />
+                                <TextBlock Grid.Column="2" Text="{Binding FullName}" />
                                 <TextBlock Grid.Column="3" Text="{Binding Email}" />
                                 <TextBlock Grid.Column="4" Text="{Binding Phone, Mode=OneWay}" Style="{StaticResource ColumnValueStyle}" />
                                 <TextBlock Grid.Column="5" Text="{Binding AddressLine1, Mode=OneWay}" Style="{StaticResource ColumnValueStyle}" />

@@ -13,6 +13,8 @@ namespace Inventory.ViewModels.Customers
         private readonly IDataService dataService;
         private int pageSize;
         private IReadOnlyList<CustomerPageViewModel> customerPages;
+        private CustomerViewModel selectedCustomer;
+        private CustomerPageViewModel selectedPage;
 
         public CustomersViewModel(IDataService dataService)
         {
@@ -25,7 +27,7 @@ namespace Inventory.ViewModels.Customers
         {
             IsBusy = true;
             var count = await dataService.GetTotalCustomers();
-            CustomerPages = Enumerable.Range(0, Math.Min(5, count)).Select(x => new CustomerPageViewModel(dataService, x, PageSize)).ToList().AsReadOnly();
+            CustomerPages = Enumerable.Range(1, Math.Min(5, count)).Select(x => new CustomerPageViewModel(dataService, x, PageSize)).ToList().AsReadOnly();
             IsBusy = false;
         }
 
@@ -46,69 +48,13 @@ namespace Inventory.ViewModels.Customers
         }
 
         public ICommand CreatePagesCommand { get; }
-    }
 
-    public class CustomerPageViewModel : ViewModelBase
-    {
-        private readonly IDataService dataservice;
-        public int Ordinal { get; }
-        private IReadOnlyList<CustomerViewModel> customers;
-        private CustomerViewModel selectedCustomer;
-
-        public CustomerPageViewModel(IDataService dataservice, int ordinal, int pageSize)
+        public CustomerPageViewModel SelectedPage
         {
-            this.dataservice = dataservice;
-            Ordinal = ordinal;
-            PageSize = pageSize;
-            LoadCustomersCommand = new DelegateCommand(async () => Customers = await LoadCustomers());
-        }
-
-        private async Task<IReadOnlyList<CustomerViewModel>> LoadCustomers()
-        {
-            IsBusy = true;
-
-            var listRequest = new ListRequest() { Skip = PageSize * Ordinal, Take = PageSize };
-            var loadCustomers = await dataservice.GetCustomers(listRequest);
-            var vms = loadCustomers.Select(x => new CustomerViewModel()
-            {
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                CustomerId = x.CustomerId,
-                Email = x.Email,
-                Thumbnail = x.Thumbnail,
-                Picture = x.Picture,                
-                Phone = x.Phone,
-                AddressLine1 = x.AddressLine1,
-                CountryName = x.CountryName,
-            }).ToList().AsReadOnly();
-
-            IsBusy = false;
-
-            return vms;
-        }
-
-        public int PageSize { get; set; }
-
-        public IReadOnlyList<CustomerViewModel> Customers
-        {
-            get => customers;
+            get => selectedPage;
             set
             {
-                customers = value;
-                OnPropertyChanged();
-            }
-        }
-
-     
-
-        public ICommand LoadCustomersCommand { get; }
-
-        public CustomerViewModel SelectedCustomer
-        {
-            get => selectedCustomer;
-            set
-            {
-                selectedCustomer = value;
+                selectedPage = value;
                 OnPropertyChanged();
             }
         }
