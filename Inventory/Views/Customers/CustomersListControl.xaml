@@ -21,6 +21,16 @@
 
     <Pivot Style="{StaticResource BottomHeaderPivotStyle}" ItemsSource="{Binding CustomerPages}" SelectedItem="{Binding SelectedPage, Mode=TwoWay}">
 
+        <Pivot.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.ThemeDictionaries>
+                    <ResourceDictionary x:Key="Default">
+                        <Thickness x:Key="PivotHeaderItemMargin">2</Thickness>
+                    </ResourceDictionary>
+                </ResourceDictionary.ThemeDictionaries>
+            </ResourceDictionary>
+        </Pivot.Resources>
+
         <Pivot.HeaderTemplate>
             <DataTemplate x:DataType="customers:CustomerPageViewModel">
                 <Button Background="Transparent" BorderThickness="1" Margin="0" BorderBrush="LightGray" Content="{Binding PageId}" />
