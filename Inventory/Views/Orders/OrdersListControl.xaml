@@ -12,11 +12,11 @@
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance orders:OrdersViewModel}">
 
-    <interactivity:Interaction.Behaviors>
+    <!--<interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
             <core:InvokeCommandAction Command="{Binding CreatePagesCommand}" />
         </core:EventTriggerBehavior>
-    </interactivity:Interaction.Behaviors>
+    </interactivity:Interaction.Behaviors>-->
 
     <Pivot Style="{StaticResource BottomHeaderPivotStyle}" ItemsSource="{Binding OrderPages}" SelectedItem="{Binding SelectedPage, Mode=TwoWay}">
 

@@ -5,6 +5,9 @@
     xmlns:local="using:Inventory"
     xmlns:controls="using:Telerik.UI.Xaml.Controls"
     xmlns:converters="using:Inventory.Converters"
+    xmlns:controls1="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:behaviors="using:Microsoft.Toolkit.Uwp.UI.Animations.Behaviors"
     RequestedTheme="Light">
 
     <Application.Resources>
@@ -623,6 +626,34 @@
                 </Setter>
             </Style>
 
+            <Style x:Key="LoadingStyle" TargetType="controls1:Loading">
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Grid>
+
+                                <Border Background="#83FFFFFF" >
+                                    <interactivity:Interaction.Behaviors>
+                                        <behaviors:Blur
+                                            Value="2.67"
+                                            Duration="698.28"
+                                            Delay="0"
+                                            AutomaticallyStart="True">
+                                        </behaviors:Blur>
+                                    </interactivity:Interaction.Behaviors>
+                                </Border>
+
+                                <ProgressRing Height="200" Width="200" IsActive="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsBusy}" />
+
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
             <Style x:Key="ColumnHeaderStyle" TargetType="TextBlock">
                 <Setter Property="Padding" Value="6" />
@@ -658,7 +689,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate>
-                            <Border Background="White" BorderThickness="1" BorderBrush="LightGray" Margin="8">
+                            <Border Background="White" BorderThickness="1" BorderBrush="LightGray">
                                 <ContentPresenter />
                             </Border>
                         </ControlTemplate>
