@@ -32,10 +32,10 @@
         <ContentControl Grid.Row="1" Style="{StaticResource PanelStyle}" >
 
             <Pivot>
-                <PivotItem Header="Customer" DataContext="{Binding SelectedPage.SelectedCustomer}">
+                <PivotItem Header="Customer" DataContext="{Binding SelectedPage.SelectedCustomerItem}">
                     <details:CustomerDetailsControls />
                 </PivotItem>
-                <PivotItem Header="Orders" DataContext="{Binding SelectedPage.SelectedCustomer.Orders}">
+                <PivotItem Header="Orders" DataContext="{Binding SelectedPage.SelectedCustomerItem.Orders}">
                     <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="DataContextChanged">
                             <core:InvokeCommandAction Command="{Binding CreatePagesCommand}" />

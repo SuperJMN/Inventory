@@ -96,16 +96,15 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ByteArrayToImageConverter.cs" />
-    <Compile Include="Mapping\CustomerDtoMapping.cs" />
     <Compile Include="Mapping\CustomerMapping.cs" />
-    <Compile Include="Mapping\OrderDtoMapping.cs" />
-    <Compile Include="Mapping\OrderMapping.cs" />
+    <Compile Include="Mapping\OrderProfile.cs" />
     <Compile Include="ViewModels\Customers\CustomerPageViewModel.cs" />
     <Compile Include="ViewModels\Customers\CustomersViewModel.cs" />
-    <Compile Include="ViewModels\Customers\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\Customers\CustomerItemViewModel.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Customers\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Orders\OrdersViewModel.cs" />
     <Compile Include="ViewModels\Orders\OrderPageViewModel.cs" />
     <Compile Include="ViewModels\Orders\OrderViewModel.cs" />

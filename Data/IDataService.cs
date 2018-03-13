@@ -10,5 +10,6 @@ namespace Inventory.Data
         Task<int> GetTotalCustomers();
         Task<List<OrderDto>> GetOrdersByCustomer(long customerCustomerId, ListRequest listRequest);
         Task<int> GetTotalOrders();
+        Task UpdateCustomer(CustomerDto map);
     }
 }

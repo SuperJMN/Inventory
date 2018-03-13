@@ -8,11 +8,11 @@
     xmlns:c="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400" d:DataContext="{d:DesignInstance customers:CustomerViewModel}">
+    d:DesignWidth="400" d:DataContext="{d:DesignInstance customers:CustomerItemViewModel}">
 
     <UserControl.Resources>
         <DataTemplate x:Key="EditingTemplate">
-            <Grid ColumnSpacing="6">
+            <Grid ColumnSpacing="6" DataContext="{Binding New}">
 
                 <Grid.Resources>
                     <Style TargetType="TextBox" BasedOn="{StaticResource BaseTextBox}">
@@ -58,8 +58,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="NormalTemplate">
-            <Grid>
-
+            <Grid DataContext="{Binding Current}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" MinWidth="180" />
                     <ColumnDefinition Width="3*" />
@@ -140,7 +139,7 @@
                 </Style>
             </StackPanel.Resources>
 
-            <Button Content="Save" />
+            <Button Content="Save" Command="{Binding SaveCommand}" />
             <Button Content="Cancel" Command="{Binding ToggleEditModeCommand}" />
         </StackPanel>
 

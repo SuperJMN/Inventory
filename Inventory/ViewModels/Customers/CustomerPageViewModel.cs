@@ -11,8 +11,8 @@ namespace Inventory.ViewModels.Customers
     {
         private readonly IDataService dataservice;
         public int PageId { get; }
-        private IReadOnlyList<CustomerViewModel> customers;
-        private CustomerViewModel selectedCustomer;
+        private IReadOnlyList<CustomerItemViewModel> customers;
+        private CustomerItemViewModel selectedCustomerItem;
 
         public CustomerPageViewModel(IDataService dataservice, int pageId, int pageSize)
         {
@@ -22,31 +22,34 @@ namespace Inventory.ViewModels.Customers
             LoadCustomersCommand = new DelegateCommand(async () =>
             {
                 Customers = await LoadCustomers();
-                SelectedCustomer = Customers.FirstOrDefault();
+                SelectedCustomerItem = Customers.FirstOrDefault();
             });
         }
 
         public int Skip { get; set; }
 
-        private async Task<IReadOnlyList<CustomerViewModel>> LoadCustomers()
+        private async Task<IReadOnlyList<CustomerItemViewModel>> LoadCustomers()
         {
             IsBusy = true;
 
             var listRequest = new ListRequest { Skip = PageSize * (PageId - 1), Take = PageSize };
             var loadCustomers = await dataservice.GetCustomers(listRequest);
-            
-            var vms = loadCustomers.Select(x => new CustomerViewModel(dataservice, x.CustomerId)
+
+            var vms = loadCustomers.Select(x => new CustomerItemViewModel(dataservice, x.CustomerId)
             {
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                CustomerId = x.CustomerId,
-                Email = x.Email,
-                Thumbnail = x.Thumbnail,
-                Picture = x.Picture,
-                Phone = x.Phone,
-                AddressLine1 = x.AddressLine1,
-                CountryName = x.CountryName,
-                MiddleName = x.MiddleName,                
+                Current = new CustomerViewModel()
+                {
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    CustomerId = x.CustomerId,
+                    Email = x.Email,
+                    Thumbnail = x.Thumbnail,
+                    Picture = x.Picture,
+                    Phone = x.Phone,
+                    AddressLine1 = x.AddressLine1,
+                    CountryName = x.CountryName,
+                    MiddleName = x.MiddleName,
+                }
             }).ToList().AsReadOnly();
 
             IsBusy = false;
@@ -56,7 +59,7 @@ namespace Inventory.ViewModels.Customers
 
         public int PageSize { get; }
 
-        public IReadOnlyList<CustomerViewModel> Customers
+        public IReadOnlyList<CustomerItemViewModel> Customers
         {
             get => customers;
             set
@@ -68,12 +71,12 @@ namespace Inventory.ViewModels.Customers
 
         public ICommand LoadCustomersCommand { get; }
 
-        public CustomerViewModel SelectedCustomer
+        public CustomerItemViewModel SelectedCustomerItem
         {
-            get => selectedCustomer;
+            get => selectedCustomerItem;
             set
             {
-                selectedCustomer = value;
+                selectedCustomerItem = value;
                 OnPropertyChanged();
             }
         }

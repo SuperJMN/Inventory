@@ -56,7 +56,7 @@ namespace Inventory.Data.Sqlite
                     .Where(x => x.CustomerID == customerCustomerId)
                     .ProjectTo<OrderDto>()
                     .ToListAsync();
-            } 
+            }
         }
 
         public async Task<int> GetTotalOrders()
@@ -66,6 +66,10 @@ namespace Inventory.Data.Sqlite
                 return await context.Orders.CountAsync();
             }
         }
-    
+
+        public Task UpdateCustomer(CustomerDto map)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

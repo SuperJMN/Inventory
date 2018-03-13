@@ -40,7 +40,7 @@
         <Pivot.ItemTemplate>
             <DataTemplate>
                 <ListView ItemsSource="{Binding Customers}" Style="{StaticResource FixedHeaderListViewStyle}" 
-                          SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}">
+                          SelectedItem="{Binding SelectedCustomerItem, Mode=TwoWay}">
 
                     <ListView.HeaderTemplate>
                         <DataTemplate>
@@ -82,7 +82,7 @@
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <Grid DataContext="{Binding Current}">
                                 <Grid.Resources>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="VerticalAlignment" Value="Center" />
