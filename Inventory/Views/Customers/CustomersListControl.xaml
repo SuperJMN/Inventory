@@ -9,6 +9,7 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:inventory="using:Inventory"
     xmlns:customers="using:Inventory.ViewModels.Customers"
+    xmlns:primitives="using:Telerik.UI.Xaml.Controls.Primitives"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance customers:CustomersViewModel}">
@@ -19,101 +20,126 @@
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
 
-    <Pivot Style="{StaticResource BottomHeaderPivotStyle}" ItemsSource="{Binding CustomerPages}" SelectedItem="{Binding SelectedPage, Mode=TwoWay}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <FlipView x:Name="Pivot" ItemsSource="{Binding CustomerPages}"
+               SelectedItem="{Binding SelectedPage, Mode=TwoWay}">
 
-        <Pivot.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.ThemeDictionaries>
-                    <ResourceDictionary x:Key="Default">
-                        <Thickness x:Key="PivotHeaderItemMargin">2</Thickness>
-                    </ResourceDictionary>
-                </ResourceDictionary.ThemeDictionaries>
-            </ResourceDictionary>
-        </Pivot.Resources>
+            <FlipView.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.ThemeDictionaries>
+                        <ResourceDictionary x:Key="Default">
+                            <Thickness x:Key="PivotHeaderItemMargin">2</Thickness>
+                        </ResourceDictionary>
+                    </ResourceDictionary.ThemeDictionaries>
+                </ResourceDictionary>
+            </FlipView.Resources>
 
-        <Pivot.HeaderTemplate>
-            <DataTemplate x:DataType="customers:CustomerPageViewModel">
-                <Button Background="Transparent" BorderThickness="1" Margin="0" BorderBrush="LightGray" Content="{Binding PageId}" />
-            </DataTemplate>
-        </Pivot.HeaderTemplate>
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <ListView ItemsSource="{Binding Customers}" Style="{StaticResource FixedHeaderListViewStyle}"
+                              SelectedItem="{Binding SelectedCustomerItem, Mode=TwoWay}">
 
-        <Pivot.ItemTemplate>
-            <DataTemplate>
-                <ListView ItemsSource="{Binding Customers}" Style="{StaticResource FixedHeaderListViewStyle}" 
-                          SelectedItem="{Binding SelectedCustomerItem, Mode=TwoWay}">
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="8*" />
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="12*" />
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="8*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Customer ID"
+                                               Style="{StaticResource ColumnHeaderStyle}" />
+                                    <TextBlock Grid.Column="2" Text="Name" Style="{StaticResource ColumnHeaderStyle}" />
+                                    <TextBlock Grid.Column="3" Text="eMail" Style="{StaticResource ColumnHeaderStyle}" />
+                                    <TextBlock Grid.Column="4" Text="Phone" Style="{StaticResource ColumnHeaderStyle}" />
+                                    <TextBlock Grid.Column="5" Text="Address"
+                                               Style="{StaticResource ColumnHeaderStyle}" />
+                                    <TextBlock Grid.Column="6" Text="Country"
+                                               Style="{StaticResource ColumnHeaderStyle}" />
 
-                    <ListView.HeaderTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40"/>
-                                    <ColumnDefinition Width="8*"/>
-                                    <ColumnDefinition Width="10*"/>
-                                    <ColumnDefinition Width="12*"/>
-                                    <ColumnDefinition Width="10*"/>
-                                    <ColumnDefinition Width="10*"/>
-                                    <ColumnDefinition Width="8*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Customer ID" Style="{StaticResource ColumnHeaderStyle}" />
-                                <TextBlock Grid.Column="2" Text="Name" Style="{StaticResource ColumnHeaderStyle}" />
-                                <TextBlock Grid.Column="3" Text="eMail" Style="{StaticResource ColumnHeaderStyle}" />
-                                <TextBlock Grid.Column="4" Text="Phone" Style="{StaticResource ColumnHeaderStyle}" />
-                                <TextBlock Grid.Column="5" Text="Address" Style="{StaticResource ColumnHeaderStyle}" />
-                                <TextBlock Grid.Column="6" Text="Country" Style="{StaticResource ColumnHeaderStyle}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.HeaderTemplate>
+                                   
 
-                    <interactivity:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Loaded">
-                            <core:InvokeCommandAction Command="{Binding LoadCustomersCommand}" />
-                        </core:EventTriggerBehavior>
-                    </interactivity:Interaction.Behaviors>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                      
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="MinHeight" Value="0" />
+                                <Setter Property="Height" Value="38" />
+                                <Setter Property="BorderBrush" Value="#BFBFBF" />
+                                <Setter Property="BorderThickness" Value="0,0,0,1" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid DataContext="{Binding Current}">
+                                    <Grid.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                            <Setter Property="Padding" Value="6" />
+                                            <Setter Property="FontSize" Value="14" />
+                                            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                                        </Style>
+                                    </Grid.Resources>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="8*" />
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="12*" />
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="8*" />
+                                    </Grid.ColumnDefinitions>
+                                    <PersonPicture
+                                        ProfilePicture="{Binding Thumbnail, Converter={StaticResource ByteArrayToBitmapConverter}}"
+                                        Height="28" Width="28" />
+                                    <TextBlock Grid.Column="1" Text="{Binding CustomerId}" />
+                                    <TextBlock Grid.Column="2" Text="{Binding FullName}" />
+                                    <TextBlock Grid.Column="3" Text="{Binding Email}" />
+                                    <TextBlock Grid.Column="4" Text="{Binding Phone, Mode=OneWay}"
+                                               Style="{StaticResource ColumnValueStyle}" />
+                                    <TextBlock Grid.Column="5" Text="{Binding AddressLine1, Mode=OneWay}"
+                                               Style="{StaticResource ColumnValueStyle}" />
+                                    <TextBlock Grid.Column="6" Text="{Binding CountryName, Mode=OneWay}"
+                                               Style="{StaticResource ColumnValueStyle}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
 
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                            <Setter Property="Padding" Value="0" />
-                            <Setter Property="MinHeight" Value="0" />
-                            <Setter Property="Height" Value="38" />
-                            <Setter Property="BorderBrush" Value="#BFBFBF" />
-                            <Setter Property="BorderThickness" Value="0,0,0,1" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid DataContext="{Binding Current}">
-                                <Grid.Resources>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="VerticalAlignment" Value="Center" />
-                                        <Setter Property="Padding" Value="6" />
-                                        <Setter Property="FontSize" Value="14" />
-                                        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-                                    </Style>
-                                </Grid.Resources>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40"/>
-                                    <ColumnDefinition Width="8*"/>
-                                    <ColumnDefinition Width="10*"/>
-                                    <ColumnDefinition Width="12*"/>
-                                    <ColumnDefinition Width="10*"/>
-                                    <ColumnDefinition Width="10*"/>
-                                    <ColumnDefinition Width="8*"/>
-                                </Grid.ColumnDefinitions>
-                                <PersonPicture ProfilePicture="{Binding Thumbnail, Converter={StaticResource ByteArrayToBitmapConverter}}" Height="28" Width="28" />
-                                <TextBlock Grid.Column="1" Text="{Binding CustomerId}" />
-                                <TextBlock Grid.Column="2" Text="{Binding FullName}" />
-                                <TextBlock Grid.Column="3" Text="{Binding Email}" />
-                                <TextBlock Grid.Column="4" Text="{Binding Phone, Mode=OneWay}" Style="{StaticResource ColumnValueStyle}" />
-                                <TextBlock Grid.Column="5" Text="{Binding AddressLine1, Mode=OneWay}" Style="{StaticResource ColumnValueStyle}" />
-                                <TextBlock Grid.Column="6" Text="{Binding CountryName, Mode=OneWay}" Style="{StaticResource ColumnValueStyle}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </DataTemplate>
-        </Pivot.ItemTemplate>
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="SelectionChanged">
+                    <core:InvokeCommandAction Command="{Binding SelectedPage.LoadCustomersCommand}" />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
 
-    </Pivot>
+        </FlipView>
+        <primitives:RadPaginationControl Background="Transparent" Grid.Row="1" HorizontalAlignment="Right" MaxWidth="400" PageProvider="{Binding ElementName=Pivot}" DisplayMode="All">
+            <!--<primitives:RadPaginationControl.ListItemTemplate>
+                <DataTemplate x:DataType="customers:CustomerPageViewModel">
+                    <TextBlock Text="{Binding PageId}" />
+                </DataTemplate>
+            </primitives:RadPaginationControl.ListItemTemplate>-->
+        </primitives:RadPaginationControl>
+    </Grid>
 </UserControl>
+
+
+
+
+
+
 
