@@ -3,7 +3,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace Inventory.Converters
+namespace Inventory.ViewSupport
 {
     public class ByteArrayToImageConverter : IValueConverter
     {

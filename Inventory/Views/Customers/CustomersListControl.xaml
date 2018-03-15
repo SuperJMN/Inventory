@@ -2,12 +2,10 @@
     x:Class="Inventory.Views.Customers.CustomersListControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Inventory.Views.Customers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:inventory="using:Inventory"
     xmlns:customers="using:Inventory.ViewModels.Customers"
     xmlns:primitives="using:Telerik.UI.Xaml.Controls.Primitives"
     mc:Ignorable="d"
@@ -22,21 +20,11 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <FlipView x:Name="Pivot" ItemsSource="{Binding CustomerPages}"
                SelectedItem="{Binding SelectedPage, Mode=TwoWay}">
-
-            <FlipView.Resources>
-                <ResourceDictionary>
-                    <ResourceDictionary.ThemeDictionaries>
-                        <ResourceDictionary x:Key="Default">
-                            <Thickness x:Key="PivotHeaderItemMargin">2</Thickness>
-                        </ResourceDictionary>
-                    </ResourceDictionary.ThemeDictionaries>
-                </ResourceDictionary>
-            </FlipView.Resources>
 
             <FlipView.ItemTemplate>
                 <DataTemplate>
@@ -127,15 +115,65 @@
             </interactivity:Interaction.Behaviors>
 
         </FlipView>
-        <primitives:RadPaginationControl Background="Transparent" Grid.Row="1" HorizontalAlignment="Right" MaxWidth="400" PageProvider="{Binding ElementName=Pivot}" DisplayMode="All">
-            <!--<primitives:RadPaginationControl.ListItemTemplate>
-                <DataTemplate x:DataType="customers:CustomerPageViewModel">
-                    <TextBlock Text="{Binding PageId}" />
-                </DataTemplate>
-            </primitives:RadPaginationControl.ListItemTemplate>-->
-        </primitives:RadPaginationControl>
+        <primitives:RadPaginationControl Grid.Row="1" PageProvider="{Binding ElementName=Pivot}" DisplayMode="All" />
     </Grid>
 </UserControl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace Inventory
+namespace Inventory.ViewSupport
 {
     public class SectionKeyTemplateSelector : DataTemplateSelector
     {
