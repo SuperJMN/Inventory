@@ -8,111 +8,114 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:customers="using:Inventory.ViewModels.Customers"
     xmlns:orders="using:Inventory.ViewModels.Orders"
+    xmlns:primitives="using:Telerik.UI.Xaml.Controls.Primitives"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400" d:DataContext="{d:DesignInstance orders:OrdersViewModel}">
 
-    <!--<interactivity:Interaction.Behaviors>
-        <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction Command="{Binding CreatePagesCommand}" />
-        </core:EventTriggerBehavior>
-    </interactivity:Interaction.Behaviors>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <FlipView x:Name="FlipView" ItemsSource="{Binding OrderPages}"
+                  SelectedItem="{Binding SelectedPage, Mode=TwoWay}">
 
-    <Pivot Style="{StaticResource BottomHeaderPivotStyle}" ItemsSource="{Binding OrderPages}" SelectedItem="{Binding SelectedPage, Mode=TwoWay}">
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <ListView ItemsSource="{Binding Orders}" Style="{StaticResource FixedHeaderListViewStyle}"
+                              SelectedItem="{Binding SelectedOrder, Mode=TwoWay}">
 
-        <ResourceDictionary>
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Default">
-                    <Thickness x:Key="PivotHeaderItemMargin">2</Thickness>
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
-        </ResourceDictionary>
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="8*" />
+                                        <ColumnDefinition Width="8*" />
+                                        <ColumnDefinition Width="8*" />
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="10*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="Order ID"
+                                               Style="{StaticResource ColumnHeaderStyle}" />
+                                    <TextBlock Grid.Column="1" Text="Customer ID"
+                                               Style="{StaticResource ColumnHeaderStyle}" />
+                                    <TextBlock Grid.Column="2" Text="Order Date"
+                                               Style="{StaticResource ColumnHeaderStyle}" />
+                                    <TextBlock Grid.Column="3" Text="Shipped Date"
+                                               Style="{StaticResource ColumnHeaderStyle}" />
+                                    <TextBlock Grid.Column="4" Text="Delivered Date"
+                                               Style="{StaticResource ColumnHeaderStyle}" />
+                                    <TextBlock Grid.Column="5" Text="Region" Style="{StaticResource ColumnHeaderStyle}" />
+                                    <TextBlock Grid.Column="6" Text="Country"
+                                               Style="{StaticResource ColumnHeaderStyle}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
 
-        <Pivot.HeaderTemplate>
-            <DataTemplate x:DataType="customers:CustomerPageViewModel">
-                <Button Background="Transparent" BorderThickness="1" Margin="0" BorderBrush="LightGray" Content="{Binding PageId}" />
-            </DataTemplate>
-        </Pivot.HeaderTemplate>
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Loaded">
+                                <core:InvokeCommandAction Command="{Binding LoadOrdersCommand}" />
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
 
-        <Pivot.ItemTemplate>
-            <DataTemplate>
-                <ListView ItemsSource="{Binding Orders}" Style="{StaticResource FixedHeaderListViewStyle}" 
-                          SelectedItem="{Binding SelectedOrder, Mode=TwoWay}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="MinHeight" Value="0" />
+                                <Setter Property="Height" Value="38" />
+                                <Setter Property="BorderBrush" Value="#BFBFBF" />
+                                <Setter Property="BorderThickness" Value="0,0,0,1" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center" />
+                                            <Setter Property="Padding" Value="6" />
+                                            <Setter Property="FontSize" Value="14" />
+                                            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                                        </Style>
+                                    </Grid.Resources>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="8*" />
+                                        <ColumnDefinition Width="8*" />
+                                        <ColumnDefinition Width="8*" />
+                                        <ColumnDefinition Width="10*" />
+                                        <ColumnDefinition Width="10*" />
+                                    </Grid.ColumnDefinitions>
 
-                    <ListView.HeaderTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="10*"/>
-                                    <ColumnDefinition Width="10*"/>
-                                    <ColumnDefinition Width="8*"/>
-                                    <ColumnDefinition Width="8*"/>
-                                    <ColumnDefinition Width="8*"/>
-                                    <ColumnDefinition Width="10*"/>
-                                    <ColumnDefinition Width="10*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Order ID" Style="{StaticResource ColumnHeaderStyle}" />
-                                <TextBlock Grid.Column="1" Text="Customer ID" Style="{StaticResource ColumnHeaderStyle}" />
-                                <TextBlock Grid.Column="2" Text="Order Date" Style="{StaticResource ColumnHeaderStyle}" />
-                                <TextBlock Grid.Column="3" Text="Shipped Date" Style="{StaticResource ColumnHeaderStyle}" />
-                                <TextBlock Grid.Column="4" Text="Delivered Date" Style="{StaticResource ColumnHeaderStyle}" />
-                                <TextBlock Grid.Column="5" Text="Region" Style="{StaticResource ColumnHeaderStyle}" />
-                                <TextBlock Grid.Column="6" Text="Country" Style="{StaticResource ColumnHeaderStyle}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.HeaderTemplate>
+                                    <TextBlock Grid.Column="0" Text="{Binding OrderId}" />
+                                    <TextBlock Grid.Column="1" Text="{Binding CustomerId}" />
+                                    <TextBlock Grid.Column="2" Text="{Binding FullName}" />
+                                    <TextBlock Grid.Column="3" Text="{Binding Email}" />
+                                    <TextBlock Grid.Column="4" Text="{Binding Phone, Mode=OneWay}"
+                                               Style="{StaticResource ColumnValueStyle}" />
+                                    <TextBlock Grid.Column="5" Text="{Binding ShipRegion, Mode=OneWay}"
+                                               Style="{StaticResource ColumnValueStyle}" />
+                                    <TextBlock Grid.Column="6" Text="{Binding CountryName, Mode=OneWay}"
+                                               Style="{StaticResource ColumnValueStyle}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
 
-                    <interactivity:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Loaded">
-                            <core:InvokeCommandAction Command="{Binding LoadCustomersCommand}" />
-                        </core:EventTriggerBehavior>
-                    </interactivity:Interaction.Behaviors>
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="SelectionChanged">
+                    <core:InvokeCommandAction Command="{Binding SelectedPage.LoadOrdersCommand}" />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
 
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                            <Setter Property="Padding" Value="0" />
-                            <Setter Property="MinHeight" Value="0" />
-                            <Setter Property="Height" Value="38" />
-                            <Setter Property="BorderBrush" Value="#BFBFBF" />
-                            <Setter Property="BorderThickness" Value="0,0,0,1" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.Resources>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="VerticalAlignment" Value="Center" />
-                                        <Setter Property="Padding" Value="6" />
-                                        <Setter Property="FontSize" Value="14" />
-                                        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-                                    </Style>
-                                </Grid.Resources>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="10*"/>
-                                    <ColumnDefinition Width="10*"/>
-                                    <ColumnDefinition Width="8*"/>
-                                    <ColumnDefinition Width="8*"/>
-                                    <ColumnDefinition Width="8*"/>
-                                    <ColumnDefinition Width="10*"/>
-                                    <ColumnDefinition Width="10*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Grid.Column="0" Text="{Binding OrderId}" />
-                                <TextBlock Grid.Column="1" Text="{Binding CustomerId}" />
-                                <TextBlock Grid.Column="2" Text="{Binding FullName}" />
-                                <TextBlock Grid.Column="3" Text="{Binding Email}" />
-                                <TextBlock Grid.Column="4" Text="{Binding Phone, Mode=OneWay}" Style="{StaticResource ColumnValueStyle}" />
-                                <TextBlock Grid.Column="5" Text="{Binding ShipRegion, Mode=OneWay}" Style="{StaticResource ColumnValueStyle}" />
-                                <TextBlock Grid.Column="6" Text="{Binding CountryName, Mode=OneWay}" Style="{StaticResource ColumnValueStyle}" />
-                                <TextBlock Grid.Column="7" Text="{Binding CountryName, Mode=OneWay}" Style="{StaticResource ColumnValueStyle}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </DataTemplate>
-        </Pivot.ItemTemplate>
-
-    </Pivot>
+        </FlipView>
+        <primitives:RadPaginationControl Grid.Row="1" PageProvider="{Binding ElementName=FlipView}" DisplayMode="All" />
+    </Grid>
 </UserControl>
