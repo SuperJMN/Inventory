@@ -1,4 +1,5 @@
 ﻿using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 using AutoMapper;
 using Inventory.Data;
 using Inventory.Data.Sqlite;
@@ -17,14 +18,16 @@ namespace Inventory
     {
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+        }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
             var container = new Grace.DependencyInjection.DependencyInjectionContainer();
             container.Configure(x => x.Export<DataService>().As<IDataService>());
             container.Configure(x => x.Export<CustomersViewModel>());
 
             Mapper.Initialize(x => x.AddProfiles(typeof(CustomerDto), typeof(Customer), typeof(CustomerItemViewModel)));
-
             this.DataContext = container.Locate<MainViewModel>();
         }
     }

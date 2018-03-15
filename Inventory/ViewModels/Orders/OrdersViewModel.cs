@@ -16,8 +16,7 @@ namespace Inventory.ViewModels.Orders
         private readonly long customerId;
         private int pageSize;
         private ReadOnlyCollection<OrderPageViewModel> orderPages;
-        private CustomerPageViewModel selectedPage;
-        private OrderPageViewModel orderPage;
+        private OrderPageViewModel selectedPage;
 
         public OrdersViewModel(IDataService dataService, long customerId)
         {
@@ -30,9 +29,9 @@ namespace Inventory.ViewModels.Orders
         private async Task CreatePages()
         {
             IsBusy = true;
-            await Task.Delay(4000);
             var count = await dataService.GetTotalOrders();
-            OrderPages = Enumerable.Range(1, Math.Min(5, count)).Select(x => new OrderPageViewModel(dataService, customerId, x, PageSize)).ToList().AsReadOnly();
+            OrderPages = Enumerable.Range(1,  Math.Min(5, count)).Select(x => new OrderPageViewModel(dataService, customerId, x, PageSize)).ToList().AsReadOnly();
+            SelectedPage = OrderPages.FirstOrDefault();
             IsBusy = false;
         }
 
@@ -54,7 +53,7 @@ namespace Inventory.ViewModels.Orders
 
         public ICommand CreatePagesCommand { get; }
 
-        public CustomerPageViewModel SelectedPage
+        public OrderPageViewModel SelectedPage
         {
             get => selectedPage;
             set
