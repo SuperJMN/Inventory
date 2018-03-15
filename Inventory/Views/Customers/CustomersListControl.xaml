@@ -23,10 +23,26 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <FlipView x:Name="Pivot" ItemsSource="{Binding CustomerPages}"
+        <Pivot x:Name="Pivot" ItemsSource="{Binding CustomerPages}" Style="{StaticResource BottomHeaderPivotStyle}"
                SelectedItem="{Binding SelectedPage, Mode=TwoWay}">
 
-            <FlipView.ItemTemplate>
+            <Pivot.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.ThemeDictionaries>
+                        <ResourceDictionary x:Key="Default">
+                            <Thickness x:Key="PivotHeaderItemMargin">2</Thickness>
+                        </ResourceDictionary>
+                    </ResourceDictionary.ThemeDictionaries>
+                </ResourceDictionary>
+            </Pivot.Resources>
+
+            <Pivot.HeaderTemplate>
+                <DataTemplate x:DataType="customers:CustomerPageViewModel">
+                    <Button Background="Transparent" BorderThickness="1" Margin="0" BorderBrush="LightGray" Content="{Binding PageId}" />
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+
+            <Pivot.ItemTemplate>
                 <DataTemplate>
                     <ListView ItemsSource="{Binding Customers}" Style="{StaticResource FixedHeaderListViewStyle}"
                               SelectedItem="{Binding SelectedCustomerItem, Mode=TwoWay}">
@@ -106,7 +122,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </DataTemplate>
-            </FlipView.ItemTemplate>
+            </Pivot.ItemTemplate>
 
             <interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="SelectionChanged">
@@ -114,7 +130,7 @@
                 </core:EventTriggerBehavior>
             </interactivity:Interaction.Behaviors>
 
-        </FlipView>
-        <primitives:RadPaginationControl Grid.Row="1" PageProvider="{Binding ElementName=Pivot}" DisplayMode="All" />
+        </Pivot>
+        <!--<primitives:RadPaginationControl Grid.Row="1" PageProvider="{Binding ElementName=Pivot}" DisplayMode="All" />-->
     </Grid>
 </UserControl>

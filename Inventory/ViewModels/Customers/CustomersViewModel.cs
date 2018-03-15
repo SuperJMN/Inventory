@@ -27,7 +27,7 @@ namespace Inventory.ViewModels.Customers
         {
             IsBusy = true;
             var count = await dataService.GetTotalCustomers();
-            CustomerPages = Enumerable.Range(1, count).Select(x => new CustomerPageViewModel(dataService, x, PageSize)).ToList().AsReadOnly();
+            CustomerPages = Enumerable.Range(1, Math.Min(5, count)).Select(x => new CustomerPageViewModel(dataService, x, PageSize)).ToList().AsReadOnly();
             IsBusy = false;
         }
 

@@ -30,7 +30,7 @@ namespace Inventory.ViewModels.Orders
         {
             IsBusy = true;
             var count = await dataService.GetTotalOrders();
-            OrderPages = Enumerable.Range(1,  count).Select(x => new OrderPageViewModel(dataService, customerId, x, PageSize)).ToList().AsReadOnly();
+            OrderPages = Enumerable.Range(1,  Math.Min(5, count)).Select(x => new OrderPageViewModel(dataService, customerId, x, PageSize)).ToList().AsReadOnly();
             SelectedPage = OrderPages.FirstOrDefault();
             IsBusy = false;
         }
