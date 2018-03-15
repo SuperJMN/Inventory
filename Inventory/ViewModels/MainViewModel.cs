@@ -12,7 +12,6 @@ namespace Inventory.ViewModels
             Sections = new List<SectionViewModel>()
             {
                 new SectionViewModel(new Section("Customers", SectionKey.Customers), customersViewModel),
-                new SectionViewModel(new Section("Orders", SectionKey.Orders), null) 
             };
 
             SelectedSection = Sections.FirstOrDefault();

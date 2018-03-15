@@ -23,7 +23,7 @@ namespace Inventory.ViewModels.Orders
             this.customerId = customerId;
             PageId = pageId;
             PageSize = pageSize;
-            LoadCustomersCommand = new DelegateCommand(async () =>
+            LoadOrdersCommand = new DelegateCommand(async () =>
             {
                 Orders = await LoadCustomers();
                 SelectedOrder = Orders.FirstOrDefault();
@@ -57,7 +57,7 @@ namespace Inventory.ViewModels.Orders
             }
         }
 
-        public ICommand LoadCustomersCommand { get; }
+        public ICommand LoadOrdersCommand { get; }
 
         public OrderViewModel SelectedOrder
         {

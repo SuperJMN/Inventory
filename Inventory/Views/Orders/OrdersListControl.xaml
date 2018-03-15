@@ -21,7 +21,6 @@
         <FlipView x:Name="FlipView" ItemsSource="{Binding OrderPages}"
                   SelectedItem="{Binding SelectedPage, Mode=TwoWay}">
 
-
             <FlipView.ItemTemplate>
                 <DataTemplate>
                     <ListView ItemsSource="{Binding Orders}" Style="{StaticResource FixedHeaderListViewStyle}"
@@ -58,7 +57,7 @@
 
                         <interactivity:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Loaded">
-                                <core:InvokeCommandAction Command="{Binding LoadCustomersCommand}" />
+                                <core:InvokeCommandAction Command="{Binding LoadOrdersCommand}" />
                             </core:EventTriggerBehavior>
                         </interactivity:Interaction.Behaviors>
 
@@ -109,6 +108,12 @@
                     </ListView>
                 </DataTemplate>
             </FlipView.ItemTemplate>
+
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="SelectionChanged">
+                    <core:InvokeCommandAction Command="{Binding SelectedPage.LoadOrdersCommand}" />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
 
         </FlipView>
         <primitives:RadPaginationControl Grid.Row="1" PageProvider="{Binding ElementName=FlipView}" DisplayMode="All" />
